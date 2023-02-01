@@ -1,3 +1,4 @@
 torch==1.11.0
 tokenizers==0.13.2
+transformers==4.26.0
 gdown==4.6.0
