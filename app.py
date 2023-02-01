@@ -1,6 +1,7 @@
+import os
 import re
-import string
 
+import gdown
 import torch
 import streamlit as st
 from tokenizers import Tokenizer
@@ -9,8 +10,20 @@ from models import BeetGpt
 from inference import generate_response
 from config import (
     VOCAB_SIZE, MODEL_PATH, TOKENIZER_PATH,
-    FROM_CHARACTERS, TO_CHARACTERS
+    FROM_CHARACTERS, TO_CHARACTERS, MODEL_URL
 )
+
+
+# Firstly we will start by downloading the model if it has not been downloaded yet.
+current_dir = os.getcwd()
+print(f"Current directory: {current_dir}")
+
+if MODEL_PATH not in os.listdir(current_dir):
+    print("Downloading model...")
+    gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
+
+else:
+    print("The model weights already exist! No need to download them!")
 
 
 st.set_page_config(

@@ -8,6 +8,7 @@ SPECIAL_TOKENS = [
 ]
 BASE_MODEL = "gpt2"
 MODEL_PATH = ".beet-gpt2.pt"
+MODEL_URL = 'https://drive.google.com/file/d/1--Ts8_8Z2K1zH7VS2KnLksQBEb7mFx2c'
 CORPUS_PATH = "corpus.txt"
 TOKENIZER_PATH = ".beetokenizer.pt"
 
