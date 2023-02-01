@@ -1,0 +1,33 @@
+VOCAB_SIZE = 30_000
+SPECIAL_TOKENS = [
+    "[UNK]",
+    "[LNE]",
+    "[CHR]",
+    "[NXT]",
+    "[PAD]",
+]
+BASE_MODEL = "gpt2"
+MODEL_PATH = ".beet-gpt2.pt"
+CORPUS_PATH = "corpus.txt"
+TOKENIZER_PATH = ".beetokenizer.pt"
+
+# Streamlit configuration variables:
+FROM_CHARACTERS = [
+    "Michael", 
+    "Dwight", 
+    "Jim", 
+    "Pam",
+    "Kevin",
+    "Angela",
+    "Andy",
+    "Meredith",
+    "Creed",
+    "Stanley",
+    "Phyllis",
+    "Oscar",
+    "Toby",
+    "Kelly",
+    "Erin",
+    "Darryl",
+]
+TO_CHARACTERS = FROM_CHARACTERS[1:] + [FROM_CHARACTERS[0]]
