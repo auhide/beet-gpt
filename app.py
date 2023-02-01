@@ -34,7 +34,7 @@ st.set_page_config(
 @st.cache(show_spinner=False)
 def get_model():
     model = BeetGpt(vocab_size=VOCAB_SIZE)
-    model.load_state_dict(torch.load(MODEL_PATH))
+    model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
     model.eval()
 
     return model
