@@ -68,7 +68,7 @@ def _display_dialogue(raw_text):
         )
 
     for line in dialogue:
-        st.write(line)
+        st.text(line)
 
 
 st.title("The Office dialogue generation")
