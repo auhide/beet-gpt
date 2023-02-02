@@ -7,11 +7,10 @@ from torch import nn
 def generate_response(
     model: nn.Module, 
     tokenizer,
-    line: str, 
-    character: str, next_character: str,
+    line: str,
+    k: int,
     device="cpu"
 ):
-    line = f"[LNE] {line} [CHR] {character} [NXT] {next_character}"
     line = tokenizer.encode(line).ids
     predictions = line
     line = torch.LongTensor(line).unsqueeze(0).to(device)
@@ -23,7 +22,9 @@ def generate_response(
         
         while curr_token_pred != "[CHR]":
             pred, _ = model(line)
-            argmax_pred = pred.argmax(-1).squeeze(0)[-1]
+            topk = torch.topk(pred, k=k)[-1]
+
+            argmax_pred = topk[:, :, -1].squeeze(0)[-1]
             predictions.append(int(argmax_pred))
             curr_token_pred = tokenizer.decode(
                 [argmax_pred], 
@@ -33,7 +34,7 @@ def generate_response(
 
     model.train()
     
-    response = tokenizer.decode(predictions, skip_special_tokens=False)
-    response = re.findall(r"\[LNE\]\s(.+?)\[CHR\]", response)[-1]
+    full_response = tokenizer.decode(predictions, skip_special_tokens=False)
+    final_answer = re.findall(r"\[LNE\]\s(.+?)\[CHR\]", full_response)[-1]
     
-    return response
+    return final_answer

@@ -31,6 +31,14 @@ st.set_page_config(
 )
 
 
+# Setting the initial session states of the page.
+if "full_response" not in st.session_state:
+    st.session_state.full_response = ""
+
+if "curr_response" not in st.session_state:
+    st.session_state.curr_response = ""
+
+
 @st.cache(show_spinner=False)
 def get_model():
     model = BeetGpt(vocab_size=VOCAB_SIZE)
@@ -45,6 +53,22 @@ def _format_response(response):
     response = re.sub(r"\s+(’)\s+", r"\1", response)
 
     return response
+
+
+def _display_dialogue(raw_text):
+    matches = re.findall(
+        r"\[LNE\](.+?)\[CHR\](.+?)\[",
+        string=raw_text
+    )
+    dialogue = []
+    
+    for line, character in matches:
+        dialogue.append(
+            _format_response(f"{character}: {line}")
+        )
+
+    for line in dialogue:
+        st.write(line)
 
 
 st.title("The Office dialogue generation")
@@ -72,19 +96,40 @@ with col2:
         TO_CHARACTERS
     )
 
-line = st.text_input(label="", placeholder="Enter line here.")
+k = st.slider("Top K Answer", 1, 5, 1)
 
-if st.button("Generate response") or line:
-    if line != "":
-        with st.spinner("Generating response..."):
-            response = generate_response(
-                model=model, 
-                tokenizer=tokenizer,
-                line=line,
-                character=from_character,
-                next_character=to_character
-            )
-            st.write(f"{from_character}: {line}")
-            st.write(f"{to_character}: {_format_response(response)}")
-    else:
-        st.warning('Please, enter a line!')
+
+line = st.text_input(label="", placeholder="Enter line here.")
+st.session_state.curr_response = line
+
+
+btn1_col1, btn1_col2, btn1_col3 = st.columns(3)
+
+
+with btn1_col2:
+    if st.button("Generate response"):
+        if line != "":
+            with st.spinner("Generating response..."):
+                st.session_state.full_response += f"[LNE] {st.session_state.curr_response} [CHR] {from_character} [NXT] {to_character} "
+
+                st.session_state.curr_response = generate_response(
+                    model=model, 
+                    tokenizer=tokenizer,
+                    line=st.session_state.full_response,
+                    k=k
+                )
+                st.session_state.full_response += f"[LNE] {st.session_state.curr_response} [CHR] {to_character} [NXT] {from_character} "
+
+                # st.write(f"{from_character}: {line}")
+                # st.write(f"{to_character}: {_format_response(st.session_state.curr_response)}")
+        else:
+            st.warning('Please, enter a line!')
+
+_display_dialogue(st.session_state.full_response)
+
+
+clear_col1, clear_col2, clear_col3, clear_col4, clear_col5 = st.columns(5)
+
+with clear_col3:
+    if st.button("🗑️", help="Clear dialogue"):
+        st.session_state.full_response = ""
