@@ -8,7 +8,7 @@ Play around with the model on [this page](https://auhide-beet-gpt-app-zk1umy.str
 ## Model
 The GPT-2 model has been fine-tuned on the whole transcript of The Office (seasons 1-9) in a causal fashion.
 
-[Download Model](https://drive.google.com/file/d/1--Ts8_8Z2K1zH7VS2KnLksQBEb7mFx2c/view?usp=sharing)
+[Download BeetGPT Weights](https://drive.google.com/file/d/1--Ts8_8Z2K1zH7VS2KnLksQBEb7mFx2c/view?usp=sharing)
 
 ### Architecture
 ```python
