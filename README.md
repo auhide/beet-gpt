@@ -1,6 +1,8 @@
 # The Office Dialogue Generator
 
-<center><img src="./static/the-office-logo.jpg"></center>
+<p align="center">
+<img src="./static/the-office-logo.jpg"></center>
+</p>
 
 ## Webpage
 Play around with the model on [this page](https://auhide-beet-gpt-app-zk1umy.streamlit.app/).
