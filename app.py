@@ -119,9 +119,6 @@ with btn1_col2:
                     k=k
                 )
                 st.session_state.full_response += f"[LNE] {st.session_state.curr_response} [CHR] {to_character} [NXT] {from_character} "
-
-                # st.write(f"{from_character}: {line}")
-                # st.write(f"{to_character}: {_format_response(st.session_state.curr_response)}")
         else:
             st.warning('Please, enter a line!')
 
