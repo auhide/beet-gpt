@@ -3,7 +3,7 @@ from tokenizers.models import BPE
 from tokenizers.trainers import BpeTrainer
 from tokenizers.pre_tokenizers import Whitespace
 
-from config import VOCAB_SIZE, CORPUS_PATH, TOKENIZER_PATH
+from lib.config import VOCAB_SIZE, CORPUS_PATH, TOKENIZER_PATH
 
 
 tokenizer = Tokenizer(BPE(unk_token="[UNK]"))
@@ -25,7 +25,8 @@ tokenizer.train(
     trainer=trainer
 )
 
-tokens = tokenizer.encode("[LNE] I am an amazing assistant to the regional manager! [CHR] Dwight [NXT] Michael")
+tokens = tokenizer.encode("[LNE] I am an amazing assistant to the regional manager! [CHR] Dwight [NXT] Michael").tokens
+print(f"Sample tokens: {tokens}")
 
 tokenizer.save(TOKENIZER_PATH)
 print("Tokenizer Saved!")

@@ -6,9 +6,9 @@ import torch
 import streamlit as st
 from tokenizers import Tokenizer
 
-from models import BeetGpt
-from inference import generate_response
-from config import (
+from lib.models import BeetGpt
+from lib.inference import generate_response
+from lib.config import (
     VOCAB_SIZE, MODEL_PATH, TOKENIZER_PATH,
     FROM_CHARACTERS, TO_CHARACTERS, MODEL_URL
 )
@@ -68,7 +68,7 @@ def _display_dialogue(raw_text):
         )
 
     for line in dialogue:
-        st.text(line)
+        st.write(line)
 
 
 st.title("The Office dialogue generation")

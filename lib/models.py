@@ -1,7 +1,7 @@
 from torch import nn
 from transformers import AutoModel
 
-from config import BASE_MODEL
+from lib.config import BASE_MODEL
 
 
 class BeetGpt(nn.Module):
