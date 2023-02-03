@@ -39,6 +39,8 @@ if "curr_response" not in st.session_state:
     st.session_state.curr_response = ""
 
 
+# Caching the model since otherwise it will be loaded on each page reload,
+# which is cumbersome.
 @st.cache(show_spinner=False)
 def get_model():
     model = BeetGpt(vocab_size=VOCAB_SIZE)
@@ -48,14 +50,14 @@ def get_model():
     return model
 
 
-def _format_response(response):
+def _format_response(response: str) -> str:
     response = re.sub(r"\s+([\.?!\,\;\:'\"]+)", r"\1", response)
     response = re.sub(r"\s+(’)\s+", r"\1", response)
 
     return response
 
 
-def _display_dialogue(raw_text):
+def _display_dialogue(raw_text: str):
     matches = re.findall(
         r"\[LNE\](.+?)\[CHR\](.+?)\[",
         string=raw_text
@@ -96,7 +98,14 @@ with col2:
         TO_CHARACTERS
     )
 
-k = st.slider("Top K Answer", 1, 5, 1)
+toggle_btn1, toggle_btn2, toggle_btn3 = st.columns(3)
+
+with toggle_btn1:
+    k = st.slider("Top K Answer", 1, 5, 1)
+
+with toggle_btn3:
+    st.markdown("##")
+    dialogue_is_continuous = st.checkbox(label="Continuous dialogue")
 
 
 line = st.text_input(label="", placeholder="Enter line here.")
@@ -105,12 +114,15 @@ st.session_state.curr_response = line
 
 btn1_col1, btn1_col2, btn1_col3 = st.columns(3)
 
-
 with btn1_col2:
     if st.button("Generate response"):
         if line != "":
             with st.spinner("Generating response..."):
-                st.session_state.full_response += f"[LNE] {st.session_state.curr_response} [CHR] {from_character} [NXT] {to_character} "
+                
+                if dialogue_is_continuous:
+                    st.session_state.full_response += f"[LNE] {st.session_state.curr_response} [CHR] {from_character} [NXT] {to_character} "
+                else:
+                    st.session_state.full_response = f"[LNE] {st.session_state.curr_response} [CHR] {from_character} [NXT] {to_character}"
 
                 st.session_state.curr_response = generate_response(
                     model=model, 
@@ -118,6 +130,8 @@ with btn1_col2:
                     line=st.session_state.full_response,
                     k=k
                 )
+
+                
                 st.session_state.full_response += f"[LNE] {st.session_state.curr_response} [CHR] {to_character} [NXT] {from_character} "
         else:
             st.warning('Please, enter a line!')
