@@ -75,9 +75,6 @@ def _display_dialogue(raw_text: str):
 
 st.title("The Office dialogue generation")
 
-col1, col2 = st.columns(2)
-from_character, to_character = "", ""
-
 
 with st.spinner("Loading model..."):
     model = get_model()
@@ -85,6 +82,19 @@ with st.spinner("Loading model..."):
 with st.spinner("Loading tokenizer..."):
     tokenizer = Tokenizer.from_file(TOKENIZER_PATH)
 
+
+toggle_btn1, toggle_btn2, toggle_btn3 = st.columns(3)
+
+with toggle_btn1:
+    k = st.slider("Top K Answer", 1, 5, 1)
+
+with toggle_btn3:
+    st.markdown("##")
+    dialogue_is_continuous = st.checkbox(label="Continuous dialogue")
+
+
+col1, col2 = st.columns(2)
+from_character, to_character = "", ""
 
 with col1:
     from_character = st.selectbox(
@@ -97,16 +107,6 @@ with col2:
         'Answer from',
         TO_CHARACTERS
     )
-
-toggle_btn1, toggle_btn2, toggle_btn3 = st.columns(3)
-
-with toggle_btn1:
-    k = st.slider("Top K Answer", 1, 5, 1)
-
-with toggle_btn3:
-    st.markdown("##")
-    dialogue_is_continuous = st.checkbox(label="Continuous dialogue")
-
 
 line = st.text_input(label="", placeholder="Enter line here.")
 st.session_state.curr_response = line
