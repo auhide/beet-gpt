@@ -1,18 +1,33 @@
 # The Office Dialogue Generator
 
+## Table of contents
+1. [Webpage](#webpage)
+2. [Model](#model)
+
+    2.1. [Architecture](#architecture)
+
+3. [Dataset](#dataset)
+
+<br>
+
 <p align="center">
 <img src="./static/the-office-logo.jpg"></center>
 </p>
 
-## Webpage
+<a id="webpage"></a>
+## 1. Webpage
 Play around with the model on [this page](https://auhide-beet-gpt-app-zk1umy.streamlit.app/).
 
-## Model
+<a id="model"></a>
+## 2. Model
+<a href="https://colab.research.google.com/drive/1WmtOraAVAIwSLLTeiWCtDcRiNNEgOp3n?usp=sharing"><img src="https://camo.githubusercontent.com/84f0493939e0c4de4e6dbe113251b4bfb5353e57134ffd9fcab6b8714514d4d1/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667" alt="Open In Colab" data-canonical-src="https://colab.research.google.com/assets/colab-badge.svg" style="max-width: 100%;"></a>
+
 The model is GPT-2, that's fine-tuned on the whole transcript of The Office (seasons 1-9) in a causal fashion.
 
 [Download BeetGPT's Weights](https://drive.google.com/file/d/1--Ts8_8Z2K1zH7VS2KnLksQBEb7mFx2c/view?usp=sharing)
 
-### Architecture
+<a id="architecture"></a>
+### 2.1. Architecture
 ```python
 BeetGpt(
   (base_model): GPT2Model(
@@ -218,3 +233,8 @@ BeetGpt(
   (project): Linear(in_features=768, out_features=30000, bias=True)
 )
 ```
+
+<a id="dataset"></a>
+## 3. Dataset
+The model has been trained on all 9 seasons of The Office for a single epoch.
+The dataset can be found on [Kaggle](https://www.kaggle.com/datasets/fabriziocominetti/the-office-lines/code?datasetId=1807639).
