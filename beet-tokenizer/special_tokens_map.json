@@ -1,0 +1,11 @@
+{
+  "additional_special_tokens": [
+    "[LNE]",
+    "[CHR]",
+    "[NXT]",
+    "[PAD]"
+  ],
+  "bos_token": "<|endoftext|>",
+  "eos_token": "<|endoftext|>",
+  "unk_token": "<|endoftext|>"
+}

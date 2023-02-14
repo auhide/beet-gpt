@@ -11,6 +11,7 @@ class BeetGpt(nn.Module):
         
         self.return_attentions = return_attentions
         self.base_model = AutoModel.from_pretrained(BASE_MODEL)
+        self.base_model.resize_token_embeddings(vocab_size)
         
         self.project = nn.Linear(768, vocab_size)
     

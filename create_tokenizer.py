@@ -1,32 +1,19 @@
-from tokenizers import Tokenizer
-from tokenizers.models import BPE
-from tokenizers.trainers import BpeTrainer
-from tokenizers.pre_tokenizers import Whitespace
+import os
 
-from lib.config import VOCAB_SIZE, CORPUS_PATH, TOKENIZER_PATH
+from transformers import AutoTokenizer
+
+from lib.config import BASE_MODEL, TOKENIZER_PATH, SPECIAL_TOKENS
 
 
-tokenizer = Tokenizer(BPE(unk_token="[UNK]"))
+tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
 
-# Choosing a whitespace pre-tokenization.
-tokenizer.pre_tokenizer = Whitespace()
+special_tokens_dict = {'additional_special_tokens': SPECIAL_TOKENS}
 
-SPECIAL_TOKENS = [
-    "[UNK]",
-    "[LNE]",
-    "[CHR]",
-    "[NXT]",
-    "[PAD]",
-]
+print("Adding more special tokens...")
+tokenizer.add_special_tokens(special_tokens_dict)
 
-trainer = BpeTrainer(special_tokens=SPECIAL_TOKENS, vocab_size=VOCAB_SIZE)
-tokenizer.train(
-    files=[CORPUS_PATH], 
-    trainer=trainer
-)
-
-tokens = tokenizer.encode("[LNE] I am an amazing assistant to the regional manager! [CHR] Dwight [NXT] Michael").tokens
-print(f"Sample tokens: {tokens}")
-
-tokenizer.save(TOKENIZER_PATH)
-print("Tokenizer Saved!")
+if not os.path.isdir(TOKENIZER_PATH):
+    os.mkdir(TOKENIZER_PATH)
+    
+tokenizer.save_pretrained(TOKENIZER_PATH)
+print("Tokenizer has been created and saved!")

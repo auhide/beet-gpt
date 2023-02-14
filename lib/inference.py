@@ -8,10 +8,10 @@ def generate_response(
     model: nn.Module, 
     tokenizer,
     line: str,
-    k: int,
+    k=1,
     device="cpu"
 ):
-    line = tokenizer.encode(line).ids
+    line = tokenizer.encode(line)
     predictions = line
     line = torch.LongTensor(line).unsqueeze(0).to(device)
     

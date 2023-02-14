@@ -5,6 +5,7 @@ import gdown
 import torch
 import streamlit as st
 from tokenizers import Tokenizer
+from transformers import AutoTokenizer
 
 from lib.models import BeetGpt
 from lib.inference import generate_response
@@ -80,15 +81,11 @@ with st.spinner("Loading model..."):
     model = get_model()
 
 with st.spinner("Loading tokenizer..."):
-    tokenizer = Tokenizer.from_file(TOKENIZER_PATH)
-
+    tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_PATH)
 
 toggle_btn1, toggle_btn2, toggle_btn3 = st.columns(3)
 
-with toggle_btn1:
-    k = st.slider("Top K Answer", 1, 5, 1)
-
-with toggle_btn3:
+with toggle_btn2:
     st.markdown("##")
     dialogue_is_continuous = st.checkbox(label="Continuous dialogue")
 
@@ -127,8 +124,7 @@ with btn1_col2:
                 st.session_state.curr_response = generate_response(
                     model=model, 
                     tokenizer=tokenizer,
-                    line=st.session_state.full_response,
-                    k=k
+                    line=st.session_state.full_response
                 )
 
                 
