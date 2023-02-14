@@ -10,7 +10,7 @@ SPECIAL_TOKENS = [
 ]
 BASE_MODEL = "gpt2"
 MODEL_PATH = ".beet-gpt2.pt"
-MODEL_URL = 'https://drive.google.com/uc?id=1--Ts8_8Z2K1zH7VS2KnLksQBEb7mFx2c'
+MODEL_URL = 'https://drive.google.com/uc?id=1qPWFoLyorzwH0YObfFzfCmM5lgoqjLry'
 CORPUS_PATH = os.path.join("data", "corpus.txt")
 TOKENIZER_PATH = "./beet-tokenizer/"
 
