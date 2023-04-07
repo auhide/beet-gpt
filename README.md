@@ -22,3 +22,40 @@ The model is GPT-2, that's fine-tuned on the whole transcript of The Office (sea
 ## Dataset
 The model has been trained on all 9 seasons of The Office for a single epoch.
 The dataset can be found on [Kaggle](https://www.kaggle.com/datasets/fabriziocominetti/the-office-lines/code?datasetId=1807639).
+
+## Examples
+Line '*Good morning!*', said by *Michael Scott*:
+> Michael: Good morning!
+
+> Dwight: Hello everyone! Remember, our wedding’s gonna be wonderful.
+___
+> Michael: Good morning!
+
+> Pam: Good morning, Michael.
+___
+> Michael: Good morning!
+
+> Angela:  All right, go away!
+___
+> Micheal: Good morning!
+
+> Creed: Hello. [Michael approaches table] Are you Michael Scott?
+
+<br>
+
+Line '*That's what she said!*', said by *Michael Scott*:
+> Michael: That's what she said!
+
+> Dwight: Ha! I don’t get it.
+---
+> Michael: That's what she said!
+
+> Pam: Am I going to tell them that?
+___
+> Michael: That's what she said!
+
+> Angela: \[leaves the party\]
+---
+> Michael: That's what she said!
+
+> Creed: \[Michael is reading a book to a hanging tire\] Wow.
