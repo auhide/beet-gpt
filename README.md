@@ -12,9 +12,9 @@ Play around with the model on [this page](https://auhide-beet-gpt-app-zk1umy.str
 
 <a id="model"></a>
 ## Model
-![Kaggle](https://img.shields.io/badge/Kaggle-035a7d?style=for-the-badge&logo=kaggle&logoColor=white)
+[![Kaggle](https://img.shields.io/badge/Kaggle-035a7d?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/code/auhide/gpt2-the-office-dialogue-generation)
 
-The model is GPT-2, that's fine-tuned on the whole transcript of The Office (seasons 1-9) in a causal fashion.
+The model is GPT-2, that's fine-tuned on the whole transcript of The Office (seasons 1-9) with a causal objective (autoregressively).
 
 [Download BeetGPT's Weights](https://drive.google.com/file/d/1--Ts8_8Z2K1zH7VS2KnLksQBEb7mFx2c/view?usp=sharing)
 
