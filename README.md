@@ -7,11 +7,11 @@
 </p>
 
 <a id="webpage"></a>
-## 1. Webpage
+## Webpage
 Play around with the model on [this page](https://auhide-beet-gpt-app-zk1umy.streamlit.app/).
 
 <a id="model"></a>
-## 2. Model
+## Model
 ![Kaggle](https://img.shields.io/badge/Kaggle-035a7d?style=for-the-badge&logo=kaggle&logoColor=white)
 
 The model is GPT-2, that's fine-tuned on the whole transcript of The Office (seasons 1-9) in a causal fashion.
@@ -19,6 +19,6 @@ The model is GPT-2, that's fine-tuned on the whole transcript of The Office (sea
 [Download BeetGPT's Weights](https://drive.google.com/file/d/1--Ts8_8Z2K1zH7VS2KnLksQBEb7mFx2c/view?usp=sharing)
 
 <a id="dataset"></a>
-## 3. Dataset
+## Dataset
 The model has been trained on all 9 seasons of The Office for a single epoch.
 The dataset can be found on [Kaggle](https://www.kaggle.com/datasets/fabriziocominetti/the-office-lines/code?datasetId=1807639).
