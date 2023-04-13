@@ -8,7 +8,7 @@
 
 <a id="webpage"></a>
 ## Webpage
-Play around with the model on [this page](https://auhide-beet-gpt-app-zk1umy.streamlit.app/).
+Play around with the model on [this page](https://beet-gpt.streamlit.app/).
 
 <a id="model"></a>
 ## Model
